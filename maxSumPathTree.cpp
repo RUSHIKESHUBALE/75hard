@@ -30,8 +30,11 @@ int getMaxSumAndPath( Node* root, int & lastNode )
 	else
 		lastNode = sumLeft > sumRight ? leftNode : rightNode;
 	
+    int maxSum = std::max( root->data, root->data + std::max( sumLeft, sumRight ) );
 
-	return root->data + std::max( sumLeft, sumRight );
+    if ( maxSum == root->data )
+        lastNode = root->data;
+	return maxSum;
 }
 
 int main()
@@ -41,7 +44,7 @@ int main()
     root->left->left = new Node(4);
     root->right = new Node(3);
     root->right->right = new Node(-6);
-    root->right->left = new Node(5);
+    root->right->left = new Node(-5);
 	
 	int lastNode = INT_MIN;
 	int maxSum = getMaxSumAndPath( root, lastNode );
